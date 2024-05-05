@@ -42,7 +42,7 @@ def predictions_view(request):
             'event_type': event_type,
             'threat_count': threat_count,
             'non_threat_count': non_threat_count,
-            'predictions': predictions
+            
         })
 
     context = {'results': results}

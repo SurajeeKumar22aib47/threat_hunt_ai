@@ -3,21 +3,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predictions</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertical Sections</title>
+<!-- Add Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: black;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between; /* Place items at each end of the header */
+        align-items: center;
+        height: 40px; /* Adjusted height of the header */
+        background-color: black;
+        color: white;
+        padding: 0 20px; /* Add padding to create space between content and edges */
+    }
+    .header-title {
+        text-align: center; /* Center align the header title */
+        margin: 0; /* Remove default margin */
+    }
+    .header-buttons {
+        display: flex;
+        align-items: center;
+    }
+    .header img {
+        width: 30px; /* Adjusted width of the button images */
+        height: 30px; /* Adjusted height of the button images */
+        margin-left: 10px; /* Adjusted margin for spacing */
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 40px); /* Adjusted height considering header */
+    }
+    .section {
+        flex: 1; /* Equal height for each section */
+        margin: 20px; /* Margin added for each section */
+        background-color: black;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+    }
+    .section:first-child {
+        flex-grow: 1;
+    }
+    .second-section {
+        height: 100%; /* Set height to match the first section */
+    }
+    .larger {
+        flex: 2;
+    }
+    .box-container {
+        display: flex;
+        justify-content: flex-start; /* Align boxes to the left */
+        align-items: center;
+        height: 100%;
+        padding: 5px; /* Padding to prevent edge cases */
+        position: relative; /* Position relative for absolute positioning */
+    }
+    .box {
+        position: relative; /* Position relative for containing the absolute timer */
+        background-color: black; /* Set background color to grey */
+        margin-right: 10px; /* Adjust margin to keep the boxes closer together */
+    }
+    .box:last-child {
+        margin-right: 0; /* Remove margin from the last box */
+    }
+    .box:nth-child(1) {
+        width: 100px;
+        height: 100px;
+        background-color: transparent; /* Set background color to transparent */
+        border-radius: 50%; /* Make it a circle */
+        border: 2px solid white; /* Add border */
+    }
+    .box:nth-child(1) {
+        border-color: red; /* Set border color for the first circle */
+    }
+    .timer-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1; /* Ensure the timer appears above the circle */
+    }
+    .timer {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        animation: pulse 1.5s infinite alternate; /* Add pulsating animation */
+    }
+    @keyframes pulse {
+        0% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
+    .box:nth-child(n+3) {
+        width: 140px;
+        height: 140px;
+    }
+    .second-section {
+        height: 80%; /* Change the height of the second section */
+    }
+    /* Set background color to blue for boxes in the second section */
+    .second-section .box-container {
+        justify-content: center; /* Align boxes to the center */
+    }
+    .section.larger .box-container .box {
+        width: 760px; /* Adjusted width for boxes in the third section */
+        height: 140px; /* Adjusted height for boxes in the third section */
+        background-color: black; /* Set background color to blue for boxes in the third section */
+    }
+    .chart-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+    }
+    .scatter-chart {
+        width: 100%;
+        height: 50%;
+    }
+    .section.larger .box-container .box {
+        width: 760px; /* Adjusted width for boxes in the third section */
+        height: 140px; /* Adjusted height for boxes in the third section */
+        background-color: black; /* Set background color to blue for boxes in the third section */
+    }
+    .third-section, .fourth-section { /* Apply the same styling for both third and fourth sections */
+        background-color: #333; /* Darker background color */
+        color: white; /* Text color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 20px; /* Add some padding */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+    /* Style for the table within the third and fourth sections */
+    .table {
+        width: 100%; /* Make the table width 100% */
+        border: none; /* Remove border */
+        color: white; /* Text color */
+        font-family: Arial, sans-serif; /* Font family */
+    }
+    .table th, .table td {
+        padding: 0px; /* Add padding */
+        border: none; /* Remove border */
+        text-align: left; /* Align text to the left */
+    }
+    .table th {
+        background-color: grey; /* Darker background color for table header */
+    }
+    .table tbody tr:nth-child(even) {
+        background-color: #444; /* Alternate row background color */
+    }
+    .table tbody tr:hover {
+        background-color: #555; /* Hover effect */
+    }
+    .h1,h2, p {
+                color: white; /* Set text color of h2 and p elements to white */
+            }
+        
+     
+
+
+
+
+
+.table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .table th, .table td {
+            padding: 8px;
+            border: none;
+            text-align: left;
+        }
+        .table th {
+            background-color: grey;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #444;
+        }
+        .table tbody tr:hover {
+            background-color: #555;
+        }
+        h1, h2, p {
+            color: white;
+        }
+    
+</style>
 <body>
-    <h1>Predictions</h1>
-    {% for result in results %}
-        <h2>{{ result.event_type }}</h2>
-        <p>Threat Count: {{ result.threat_count }}</p>
-        <p>Non-Threat Count: {{ result.non_threat_count }}</p>
-        <ul>
-            {% for prediction in result.predictions %}
-                <li>{{ prediction }}</li>
+    <body>
+        <header class="header">
+            <h1 class="header-title">CYBER SECURITY</h1>
+            <div class="header-buttons">
+                <img src="notification.jpg" >
+                <img src="menu.png" >
+            </div>
+        </header>
+    
+        <div class="container">
+            <div class="section">
+                <div class="box-container">
+                    <div class="box">
+                        <div class="timer-container">
+                            <div class="timer" id="timer"></div>
+                        </div>
+                    </div>
+                    <!-- Removed one circle -->
+                    <div class="box larger">
+                        <canvas id="liveChart1"></canvas>
+                    </div>
+                    <div class="box larger">
+                        <canvas id="liveChart2"></canvas>
+                    </div>
+                    <div class="box larger">
+                        <canvas id="liveChart3"></canvas>
+                    </div>
+                    <div class="box larger">
+                        <canvas id="liveChart4"></canvas>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <h1 style="color: white;">Predictions</h1>
+        <table class="table">
+            <tr>
+                <th style="color: white;">Log Type</th>
+                <th  style="color: white;">Threat Count</th>
+                <th  style="color: white;">Non-Threat Count</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.event_type }}</td>
+                <td>{{ result.threat_count }}</td>
+                <td>{{ result.non_threat_count }}</td>
+            </tr>
             {% endfor %}
-        </ul>
-    {% endfor %}
-</body>
+        </table>
+           
+                    <canvas id="scatterChart" class="scatter-chart" style="height: 60%;"></canvas> <!-- Scatter plot chart canvas -->
+                
+            </div>
+            
+  
+    
+            
+    </body>
+<script>
+    // Generate random data for the chart
+    function generateRandomData() {
+        return Math.floor(Math.random() * 100);
+    }
+
+    // Create charts
+    var ctx1 = document.getElementById('liveChart1').getContext('2d');
+    var ctx2 = document.getElementById('liveChart2').getContext('2d');
+    var ctx3 = document.getElementById('liveChart3').getContext('2d');
+    var ctx4 = document.getElementById('liveChart4').getContext('2d');
+    var scatterCtx = document.getElementById('scatterChart').getContext('2d'); // Scatter plot chart context
+
+    var chart1 = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'NETWORK LOG',
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var chart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'APPLICATION LOG',
+                data: [],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var chart3 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'PERFOMANCE LOG',
+                data: [],
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var chart4 = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'CONNECTIONS',
+                data: [],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    
+       
+    // Countdown timer function
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.addEventListener('load', function() {
+        var firstSectionHeight = document.querySelector('.section:first-child').offsetHeight;
+        document.querySelector('.second-section').style.height = firstSectionHeight + 'px';
+
+        var timerDuration = 5 * 60; // 5 minutes
+        var display = document.getElementById('timer');
+        startTimer(timerDuration, display);
+    });
+
+    // Update charts with random data every second
+    setInterval(function() {
+        var newData1 = generateRandomData();
+        var newData2 = generateRandomData();
+        var newData3 = generateRandomData();
+        var newData4 = generateRandomData();
+
+        chart1.data.labels.push('');
+        chart1.data.datasets[0].data.push(newData1);
+        chart1.update();
+
+        chart2.data.labels.push('');
+        chart2.data.datasets[0].data.push(newData2);
+        chart2.update();
+
+        chart3.data.labels.push('');
+        chart3.data.datasets[0].data.push(newData3);
+        chart3.update();
+
+        chart4.data.labels.push('');
+        chart4.data.datasets[0].data.push(newData4);
+        chart4.update();
+    }, 1000); // Update every second
+</script>
+
+
 </html>

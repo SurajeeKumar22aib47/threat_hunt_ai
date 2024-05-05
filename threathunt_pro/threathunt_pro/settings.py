@@ -124,3 +124,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOG_DIRECTORY = 'C:\\EventLogs'
+# settings.py
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'run-predictions-every-5-minutes': {
+        'task': 'threathunt_ai.tasks.run_predictions',
+        'schedule': 300,  # 300 seconds = 5 minutes
+    },
+}
