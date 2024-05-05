@@ -1,0 +1,23 @@
+<!-- myapp/templates/predictions.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+</head>
+<body>
+    <h1>Predictions</h1>
+    {% for result in results %}
+        <h2>{{ result.event_type }}</h2>
+        <p>Threat Count: {{ result.threat_count }}</p>
+        <p>Non-Threat Count: {{ result.non_threat_count }}</p>
+        <ul>
+            {% for prediction in result.predictions %}
+                <li>{{ prediction }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
