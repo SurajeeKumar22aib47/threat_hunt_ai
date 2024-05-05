@@ -369,7 +369,13 @@
 
 
     
-       
+    // Function to reload the page
+    function reloadPage() {
+        location.reload();
+    }
+
+    // Set timeout to reload the page every 5 minutes (300,000 milliseconds)
+    setTimeout(reloadPage, 300000); // 300,000 milliseconds = 5 minutesss
     // Countdown timer function
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
