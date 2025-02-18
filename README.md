@@ -55,3 +55,11 @@ Each **log type** has **different input-output parameters**. Logs are **retrieve
 
 ![Log Retrieval](https://github.com/user-attachments/assets/a5dd6539-3354-45c6-99b5-1f1955594fab)  
 ![System Monitoring](https://github.com/user-attachments/assets/6cc373c6-b42e-45d3-a367-385e2d7a9530)  
+
+
+---
+### 📩 Contact
+For queries, reach out via:
+📧 Email: sksurajee1245@gmail.com  
+🌐 Website: [Surajee Kumar S](https://surajee-kumar-portfolio.netlify.app/)  
+🔗 LinkedIn: [Surajee Kumar](https://www.linkedin.com/in/surajee-kumar-853909256)
