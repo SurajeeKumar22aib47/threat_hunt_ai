@@ -1,34 +1,57 @@
-1.Introduction 
+# Cyber Security System with Generative AI for Threat Detection  
 
+## 1. Introduction  
 
-The cyber security system with generative AI for threat detection, the aim of the project is to develop a cutting-edge AI system for early detection of cyber security threats. Leveraging generative models and machine learning algorithms, the system aims to accurately identify anomalies in network traffic, system logs, and user behavior indicative of potential security breaches. The system enables organizations to proactively mitigate risks and prevent cyber Attacks before they escalate. The goal is to enhance threat detection accuracy, reduce false positives, improve incident response times, and adapt to evolving threats. Ultimately, the project aims to empower organizations with actionable intelligence to strengthen their cyber security defense and protect critical assets. In recent digital landscape, cyber threats are becoming increasingly complex. To combat this, our project aims to create an advanced AI system that can detect cyber security threats early on. 
-In response to the escalating complexity of cyber threats, this project endeavors to develop a sophisticated generative AI-based system for the early detection of cyber security threats. Using cutting-edge machine learning techniques, our system analyses different types of data like network activity, system events, and user behavior. It looks for any unusual patterns that could signal a security breach, such as malware attacks, phishing attempts, or insider threats. By providing real-time insights and alerts, our system helps organizations take proactive steps to protect themselves, keeping their valuable data and assets safe from modern cyber threats. Even threats are increasing, recent times most of the product companies are increasing their firewall as they are facing data leakage and the threads. The motive towards the project is that, it is much convenient in time duration as they do not take much time in the detection of the threats. Securing the reputed data’s from the company are mandatory in every field to take over these data’s the firewall protection should be much efficient and powerful. It should be highly active and valuable to secure the data and alert the users if any type of threats is detected. Let us further move on in detail about the working model of the security system and descriptions of the project. 
+The **Cyber Security System with Generative AI for Threat Detection** aims to develop a **cutting-edge AI system** for the early detection of **cyber security threats**. Leveraging **generative models** and **machine learning algorithms**, the system accurately identifies **anomalies in network traffic, system logs, and user behavior** that indicate potential security breaches.  
 
+### Key Objectives:  
+✅ **Proactive Threat Mitigation** – Prevent cyber attacks before escalation.  
+✅ **Enhanced Detection Accuracy** – Improve anomaly detection in real-time.  
+✅ **Reduced False Positives** – Ensure precise threat identification.  
+✅ **Faster Incident Response** – Optimize security team reaction times.  
+✅ **Adaptive Security Model** – Evolve with emerging cyber threats.  
 
-<img width="263" alt="image" src="https://github.com/user-attachments/assets/c4ef4f82-6ffd-4be0-b17e-6b52b0f93256" />
+### How It Works:  
+- Uses **advanced ML models** to analyze **network activity, system logs, and user behavior**.  
+- Detects **malware attacks, phishing attempts, and insider threats**.  
+- Provides **real-time alerts and insights** for security teams.  
+- Seamlessly integrates with **firewall protection** to prevent **data breaches**.  
 
+As cyber threats continue to evolve, many companies are strengthening their **firewall security** to prevent **data leaks**. This AI-driven solution is **fast, efficient, and capable of detecting threats in real time**. The system ensures **high-level data protection** while immediately alerting users of potential risks.  
 
+Let’s explore the **working model** and **detailed descriptions** of the security system.  
 
-Accuracy on Training dataset :  0.987
-Accuracy on Testing dataset :  0.983
-precision         recall  f1-score   support
+![Cyber Security System](https://github.com/user-attachments/assets/c4ef4f82-6ffd-4be0-b17e-6b52b0f93256)  
 
-non-breached       1.00      1.00      1.00     69039
-breached           1.00      1.00      1.00     69257
-accuracy                               0.980    138296
-macro avg          1.00      1.00      1.00    138296
-weighted avg       1.00      1.00      1.00    138296
+### Model Performance:  
+- **Training Accuracy**: **0.987**  
+- **Testing Accuracy**: **0.983**  
 
+| Class | Precision | Recall | F1-score | Support |
+|--------|------------|--------|----------|---------|
+| **Non-Breached** | 1.00 | 1.00 | 1.00 | 69,039 |
+| **Breached** | 1.00 | 1.00 | 1.00 | 69,257 |
+| **Overall Accuracy** | **0.980** | | | 138,296 |
 
+![Performance Graph](https://github.com/user-attachments/assets/12a2df33-d000-41da-8eae-3da6aa87be20)  
 
-<img width="223" alt="image" src="https://github.com/user-attachments/assets/12a2df33-d000-41da-8eae-3da6aa87be20" />
+---
 
+## 2. Log Retrieving Module  
 
+The **Log Retrieving Module** processes and classifies system logs using libraries like **os, csv, time, and win32evtlog** to enhance **data collection and system monitoring**.  
 
+### Log Classification:  
+📌 **Network Logs** – Tracks **network connections, IP traffic, and firewall activity**.  
+📌 **Application Logs** – Monitors **installed software (Chrome, antivirus, programs, etc.)**.  
+📌 **Performance Logs** – Analyzes **CPU, GPU, memory, and disk performance**.  
 
-2.Log retrieving module
+### Feature Extraction:  
+- **Event IDs**  
+- **Source Names**  
+- **Input & Output Networks**  
 
+Each **log type** has **different input-output parameters**. Logs are **retrieved every 5 minutes** and passed to the **AI model** for analysis. The **results are displayed to the user** in a **Django-based web dashboard**, allowing individual users to **access system reports via a web portal**.  
 
-The module uses libraries like os, csv, time, and win32evtlog to handle file operations, CSV files, time-related functions and Windows event logs, streamlining data collection and analysis, and enhancing system monitoring.
-After retrieving the logs we classify into 3 types, the log manages networking wil be classified network logs, the log manage installed applications such as chrome, anti-virus software, programs etc ., will be classified as application logs, the log manages the performance of cpu, gpu, memory and disk will be classified as performance logs. The feature extracted from the logs are event ids, source  name of the event, input and output networks. It varies for every logs based on the log type input and output range will differ. These 3 logs are retrieved for every 5 minutes and will be passed to the model one by one and the results will be displayed to the user.  The report is integrated with Django frame work so that every user can have separate access to software and user can view their system report in their web portal.  <img width="177" alt="image" src="https://github.com/user-attachments/assets/a5dd6539-3354-45c6-99b5-1f1955594fab" />
-<img width="183" alt="image" src="https://github.com/user-attachments/assets/6cc373c6-b42e-45d3-a367-385e2d7a9530" />
+![Log Retrieval](https://github.com/user-attachments/assets/a5dd6539-3354-45c6-99b5-1f1955594fab)  
+![System Monitoring](https://github.com/user-attachments/assets/6cc373c6-b42e-45d3-a367-385e2d7a9530)  
